@@ -4,6 +4,7 @@ import 'package:attention_test/levels/widget/custom_button.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 class Level7 extends StatefulWidget {
   const Level7({Key? key}) : super(key: key);
 
@@ -17,10 +18,15 @@ class _Level7State extends State<Level7> {
   late double fontSize = 50;
   late bool firstAns = true;
   late int ans = 0;
+  late int error = 0;
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    timer();
+  }
+
+  timer() {
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       setState(() {
         if (sec > 0) {
@@ -30,6 +36,84 @@ class _Level7State extends State<Level7> {
         }
       });
     });
+  }
+
+  stop() {
+    _timer.cancel();
+    error = 0;
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Center(
+              child: Text("😥لقد فشلت"),
+            ),
+            actions: [
+              CustomButton(
+                function: () {
+                  Get.back();
+                  sec = 30;
+                  firstAns = true;
+                  timer();
+                },
+                buttonText: "حاول مجددا",
+              )
+            ],
+          );
+        });
+  }
+
+  incorrect() {
+    _timer.cancel();
+    if (firstAns == true) {
+      firstAns = false;
+      ans = 30 - sec;
+    }
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Center(
+              child: Text("خطأ!"),
+            ),
+            actions: [
+              CustomButton(
+                function: () {
+                  Get.back();
+
+                  timer();
+                },
+                buttonText: "حاول مجددا",
+              )
+            ],
+          );
+        });
+  }
+
+  correct() {
+    _timer.cancel();
+    if (firstAns == true) {
+      firstAns = false;
+      ans = 30 - sec;
+    }
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Center(
+              child: Text("أحسنت"),
+            ),
+            actions: [
+              CustomButton(
+                function: () {
+                  Get.offAll(() => const Levels());
+                },
+                buttonText: "تم",
+                sizeTextButton: 30,
+              )
+            ],
+          );
+        });
   }
 
   @override
@@ -52,40 +136,15 @@ class _Level7State extends State<Level7> {
               InkWell(
                 splashColor: Colors.black26,
                 onTap: () {
-                  _timer.cancel();
-                  if(firstAns == true){firstAns= false;ans = 30 - sec;}
-                  if (kDebugMode) {
-                    print(ans);
+                  error++;
+                  if (error == 5) {
+                    stop();
+                  } else {
+                    incorrect();
                   }
-
-                  showDialog(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return AlertDialog(
-                          title: const Center(
-                            child: Text("خطأ!"),
-                          ),
-                          actions: [
-                            CustomButton(
-                              function: () {
-                                Get.back();
-                                sec = 31;
-                                _timer = Timer.periodic(
-                                    const Duration(seconds: 1), (timer) {
-                                  setState(() {
-                                    if (sec > 0) {
-                                      sec--;
-                                    } else {
-                                      _timer.cancel();
-                                    }
-                                  });
-                                });
-                              },
-                              buttonText: "حاول مجددا",
-                            )
-                          ],
-                        );
-                      });
+                  if (kDebugMode) {
+                    print("$ans===================");
+                  }
                 },
                 child: Ink.image(
                   image: const AssetImage("assets/12.png"),
@@ -97,39 +156,15 @@ class _Level7State extends State<Level7> {
               InkWell(
                 splashColor: Colors.black26,
                 onTap: () {
-                  _timer.cancel();
-                  if(firstAns == true){firstAns= false;ans = 30 - sec;}
-                  if (kDebugMode) {
-                    print(ans);
+                  error++;
+                  if (error == 5) {
+                    stop();
+                  } else {
+                    incorrect();
                   }
-                  showDialog(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return AlertDialog(
-                          title: const Center(
-                            child: Text("خطأ!"),
-                          ),
-                          actions: [
-                            CustomButton(
-                              function: () {
-                                Get.back();
-                                sec = 31;
-                                _timer = Timer.periodic(
-                                    const Duration(seconds: 1), (timer) {
-                                  setState(() {
-                                    if (sec > 0) {
-                                      sec--;
-                                    } else {
-                                      _timer.cancel();
-                                    }
-                                  });
-                                });
-                              },
-                              buttonText: "حاول مجددا",
-                            )
-                          ],
-                        );
-                      });
+                  if (kDebugMode) {
+                    print("$ans===================");
+                  }
                 },
                 child: Ink.image(
                   image: const AssetImage("assets/12.png"),
@@ -141,21 +176,10 @@ class _Level7State extends State<Level7> {
               InkWell(
                 splashColor: Colors.black26,
                 onTap: () {
-                  _timer.cancel();
-                  if(firstAns == true){firstAns= false;ans = 30 - sec;}
+                  correct();
                   if (kDebugMode) {
-                    print(ans);
+                    print("$ans===================");
                   }
-                  showDialog(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return AlertDialog(
-                          title: const Center(
-                            child: Text("أحسنت"),
-                          ),
-                          actions: [CustomButton(function: () {Get.offAll(()=>const Levels());},buttonText: "تم",sizeTextButton: 30,)],
-                        );
-                      });
                 },
                 child: Ink.image(
                   image: const AssetImage("assets/12.png"),
@@ -171,4 +195,3 @@ class _Level7State extends State<Level7> {
     );
   }
 }
-// AlertDialog(title: Text("Ahmed"),content: Text("Mohammed")),
