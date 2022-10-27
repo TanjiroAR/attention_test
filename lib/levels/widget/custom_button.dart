@@ -12,7 +12,7 @@ class CustomButton extends StatelessWidget {
     super.key,
     this.buttonText = 'ابدء',
     required this.function,
-    this.width = double.infinity,
+    this.width = 80,
     this.height = 50,
     this.borderRadius = 10,
     this.sizeTextButton = 15,

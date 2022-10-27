@@ -34,34 +34,42 @@ class Level extends StatelessWidget {
             splashColor: Colors.black26,
             onTap: ()=>function(),
 
-            child: Ink.image(
-              image: AssetImage(assets),
-              height: height,
-              width: double.infinity,
-              fit: BoxFit.cover,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      text1,
-                      style: TextStyle(
-                        fontWeight: fontWeight,
-                        color: colorText,
-                        fontSize: sizeText,
+            child: Container(
+              color: Colors.black12,
+              child: Column(
+                children: [
+                  Ink.image(
+                    image: AssetImage(assets),
+                    height: height,
+                    width: double.infinity,
+                    fit: BoxFit.cover,
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+
+                    children: [
+                      Text(
+                        text1,
+                        style: TextStyle(
+                          fontWeight: fontWeight,
+                          color: colorText,
+                          fontSize: sizeText,
+                        ),
+                        textAlign: TextAlign.center,
                       ),
-                      textAlign: TextAlign.center,
-                    ),
-                    Text(
-                      text2,
-                      style: TextStyle(
-                        fontWeight: fontWeight,
-                        color: colorText,
-                        fontSize: sizeText * 1.7,
+                      Text(
+                        text2,
+                        style: TextStyle(
+                          fontWeight: fontWeight,
+                          color: colorText,
+                          fontSize: sizeText * 1.7,
+                        ),
+                        textAlign: TextAlign.center,
                       ),
-                      textAlign: TextAlign.center,
-                    ),
-                  ],
-                )
+                    ],
+                  )
+                ],
+              ),
             ),
           ),
 
@@ -70,43 +78,3 @@ class Level extends StatelessWidget {
     );
   }
 }
-// Padding(
-//   padding: const EdgeInsets.all(16).copyWith(bottom: 0),
-//   child:  Text(
-//     '',
-//     style: TextStyle(fontSize: sizeText),
-//     textAlign: TextAlign.right,
-//   ),
-// ),
-// Ink.image(
-//   image: AssetImage(assets),
-//   height: height,
-//   fit: BoxFit.cover,
-//
-//   child: InkWell(
-//     onTap: () => function,
-//   ),
-// ),
-// Positioned(
-//     child: Column(
-//   children: [
-//     Text(
-//       text1,
-//       style: TextStyle(
-//         fontWeight: fontWeight,
-//         color: colorText,
-//         fontSize: sizeText,
-//       ),
-//       textAlign: TextAlign.center,
-//     ),
-//     Text(
-//       text2,
-//       style: TextStyle(
-//         fontWeight: fontWeight,
-//         color: colorText,
-//         fontSize: sizeText * 1.7,
-//       ),
-//       textAlign: TextAlign.center,
-//     ),
-//   ],
-// )),

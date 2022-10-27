@@ -1,6 +1,9 @@
 import 'package:attention_test/levels/widget/custom_button.dart';
 import 'package:attention_test/levels/widget/custom_text.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import '../levels_list.dart';
 
 class Details extends StatelessWidget {
   final String assets, text, buttonText;
@@ -35,7 +38,10 @@ class Details extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        automaticallyImplyLeading: true,
+        leading: IconButton(onPressed: (){Get.offAll( const Levels());}, icon:  const Icon(Icons.arrow_back)),
+      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -54,7 +60,7 @@ class Details extends StatelessWidget {
               fontWeight: fontWeight,
               fontSize: sizeText,
             ),
-            CustomButton(function: ()=> function(),)
+            CustomButton(function: ()=> function(),width: double.infinity)
 
           ],
         ),
@@ -62,28 +68,3 @@ class Details extends StatelessWidget {
     );
   }
 }
-// InkWell(
-// onTap: ()=> function(),
-//
-// child: Container(
-//
-// width: width,
-// height: height,
-// decoration: BoxDecoration(
-// image: DecorationImage(
-// image: AssetImage(image),
-// fit: BoxFit.cover
-// ),
-// color: colorButton,
-// borderRadius: BorderRadius.circular(borderRadius),
-// ),
-// child: Center(
-// child: CustomText(
-// text: buttonText,
-// color: colorTextButton,
-// fontSize: sizeTextButton,
-// fontWeight: fontWeight,
-// ),
-// ),
-// ),
-// )

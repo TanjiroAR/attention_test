@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:attention_test/data/levels_data.dart';
 import 'package:attention_test/levels/levels_list.dart';
 import 'package:attention_test/levels/widget/custom_button.dart';
 import 'package:flutter/foundation.dart';
@@ -17,12 +18,28 @@ class _Level7State extends State<Level7> {
   late int sec = 30;
   late double fontSize = 50;
   late bool firstAns = true;
+  late int cans = 0;
   late int ans = 0;
+  late int time=0;
   late int error = 0;
+  SqlDb sqlDb = SqlDb();
+
+  updateData(int tofa, int toca, int time, int nerrors, String answer , String note) async{
+    await sqlDb.updateData("UPDATE 'data' SET tofa = $tofa,toca = $toca,time = $time, nerrors = $nerrors, answer = '$answer', note = '$note'  WHERE level = 7");
+
+  }
+
+  readData() async{
+    List<Map> response = await sqlDb.readData("SELECT * FROM 'data'");
+    if (kDebugMode) {
+      print("$response");
+    }
+  }
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+
     timer();
   }
 
@@ -40,7 +57,7 @@ class _Level7State extends State<Level7> {
 
   stop() {
     _timer.cancel();
-    error = 0;
+
     showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -51,6 +68,7 @@ class _Level7State extends State<Level7> {
             actions: [
               CustomButton(
                 function: () {
+                  error = 0;
                   Get.back();
                   sec = 30;
                   firstAns = true;
@@ -78,12 +96,13 @@ class _Level7State extends State<Level7> {
             ),
             actions: [
               CustomButton(
-                function: () {
+                function: ()  {
                   Get.back();
-
                   timer();
+                  // int response = await sqlDb.deleteData("DELETE FROM 'data' WHERE level = 1");
                 },
                 buttonText: "حاول مجددا",
+                width: double.infinity,
               )
             ],
           );
@@ -92,6 +111,7 @@ class _Level7State extends State<Level7> {
 
   correct() {
     _timer.cancel();
+
     if (firstAns == true) {
       firstAns = false;
       ans = 30 - sec;
@@ -104,12 +124,27 @@ class _Level7State extends State<Level7> {
               child: Text("أحسنت"),
             ),
             actions: [
-              CustomButton(
-                function: () {
-                  Get.offAll(() => const Levels());
-                },
-                buttonText: "تم",
-                sizeTextButton: 30,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  CustomButton(
+                    function: ()  {
+                      Get.offAll(() => const Levels());
+                      readData();
+                      cans = 30 - sec;
+                    },
+                    buttonText: "القائمة",
+
+                  ),
+                  CustomButton(
+                    function: ()  {
+                      Get.offAll(() => const Levels());
+                      readData();
+                      cans = 30 - sec;
+                    },
+                    buttonText: "المستوى التالي",
+                  ),
+                ],
               )
             ],
           );
@@ -125,7 +160,7 @@ class _Level7State extends State<Level7> {
         children: [
           Text(sec.toString(), style: TextStyle(fontSize: fontSize)),
           Ink.image(
-            image: const AssetImage("assets/12.png"),
+            image: const AssetImage("assets/level7/2.jpg"),
             height: 150,
             width: 150,
             fit: BoxFit.cover,
@@ -142,12 +177,12 @@ class _Level7State extends State<Level7> {
                   } else {
                     incorrect();
                   }
-                  if (kDebugMode) {
-                    print("$ans===================");
-                  }
+                  // if (kDebugMode) {
+                  //   print("$ans===================");
+                  // }
                 },
                 child: Ink.image(
-                  image: const AssetImage("assets/12.png"),
+                  image: const AssetImage("assets/level7/22.jpg"),
                   height: 100,
                   width: 100,
                   fit: BoxFit.cover,
@@ -162,12 +197,12 @@ class _Level7State extends State<Level7> {
                   } else {
                     incorrect();
                   }
-                  if (kDebugMode) {
-                    print("$ans===================");
-                  }
+                  // if (kDebugMode) {
+                  //   print("$ans===================");
+                  // }
                 },
                 child: Ink.image(
-                  image: const AssetImage("assets/12.png"),
+                  image: const AssetImage("assets/level7/33.jpg"),
                   height: 100,
                   width: 100,
                   fit: BoxFit.cover,
@@ -176,13 +211,19 @@ class _Level7State extends State<Level7> {
               InkWell(
                 splashColor: Colors.black26,
                 onTap: () {
+                  cans = 30 - sec;
+                  int time = cans - ans;
+
+                  updateData(ans, cans, time, error, "نعم", "");
+
                   correct();
-                  if (kDebugMode) {
-                    print("$ans===================");
-                  }
+
+                  // if (kDebugMode) {
+                  //   print("$ans===================");
+                  // }
                 },
                 child: Ink.image(
-                  image: const AssetImage("assets/12.png"),
+                  image: const AssetImage("assets/level7/3.jpg"),
                   height: 100,
                   width: 100,
                   fit: BoxFit.cover,

@@ -29,9 +29,11 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
-  sqflite: ^2.1.0
-  path: ^1.8.2
-  get: ^4.6.5
+  lottie:
+  path_provider:
+  sqflite:
+  path:
+  get:
   flutter:
     sdk: flutter
 
@@ -62,7 +64,17 @@ flutter:
   # the material Icons class.
   uses-material-design: true
   assets:
+    - assets/level1/
+    - assets/level2/
+    - assets/level3/
+    - assets/level4/
+    - assets/level5/
+    - assets/level6/
+    - assets/level7/
+    - assets/level8/
+    - assets/level9/
     - assets/12.png
+    - assets/000.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:

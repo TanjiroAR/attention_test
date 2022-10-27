@@ -31,12 +31,13 @@ class SqlDb {
   _onCreate(Database db, int version) async {
     await db.execute('''
     CREATE TABLE "data"(
-      "level" INTEGER PRIMARY KEY, tofa INTEGER, 
-      "toca" INTEGER, 
-      "time" INTEGER, 
-      "nerrors" INTEGER, 
-      "answer" TEXT, 
-      "notes" TEXT)
+      "level" INTEGER PRIMARY KEY,
+      "tofa" INTEGER,
+      "toca" INTEGER,
+      "time" INTEGER,
+      "nerrors" INTEGER,
+      "answer" TEXT,
+      "note" TEXT)
     ''');
     if (kDebugMode) {
       print('onCreate======================');
