@@ -1,13 +1,20 @@
 import 'package:attention_test/data/levels_data.dart';
 import 'package:attention_test/levels/details.dart';
+import 'package:attention_test/levels/level_10.dart';
 import 'package:attention_test/levels/level_2.dart';
+import 'package:attention_test/levels/level_4.dart';
+import 'package:attention_test/levels/level_6.dart';
 import 'package:attention_test/levels/level_7.dart';
 import 'package:attention_test/levels/level_1.dart';
+import 'package:attention_test/levels/level_9.dart';
 import 'package:attention_test/levels/widget/level_details.dart';
 import 'package:attention_test/levels/widget/lists.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'level_3.dart';
+import 'level_5.dart';
+import 'level_8.dart';
 
 class Levels extends StatefulWidget {
   const Levels({Key? key}) : super(key: key);
@@ -58,7 +65,7 @@ class _LevelsState extends State<Levels> {
       body: ListView(
         children: [
           Level(
-            assets: "assets/000.png",
+              assets: "assets/000.png",
               function: () {
                 Get.to(() => const Data());
               },
@@ -75,6 +82,7 @@ class _LevelsState extends State<Levels> {
                       text:
                           "الانتباه دون انزعاج عندما يتعرض لضوء منخفض و ترتفع شدة الاضاءة بمرور 30 ثانية",
                       assets: "assets/level1/011.png",
+                      title: "المستوى الاول",
                     ));
               },
               assets: "assets/level1/011.png",
@@ -92,6 +100,7 @@ class _LevelsState extends State<Levels> {
                       text:
                           "الانتباه البصري الأول لنجم مضئ متحرك يظهر ثم تختفى فى اماكن مختلفة من الشاشة على خلفية مظلمة لمدة 30 ثانية ( ثلاث مرات فى كل مرة 10 ثوانى ) ",
                       assets: "assets/level2/18.png",
+                      title: "المستوى الثاني",
                     ));
               },
               assets: "assets/level2/18.png",
@@ -103,10 +112,13 @@ class _LevelsState extends State<Levels> {
           Level(
               function: () {
                 Get.to(() => Details(
-                      function: () {},
+                      function: () {
+                        Get.to(const Car());
+                      },
                       text:
                           "استمرار الانتباه البصري لسيارة تسير بسرعة ثم تتوقف فجأة و تتكرر(6) مرات متتالية .",
                       assets: "assets/level3/15.png",
+                      title: "المستوى الثالث",
                     ));
               },
               assets: "assets/level3/15.png",
@@ -118,10 +130,13 @@ class _LevelsState extends State<Levels> {
           Level(
               function: () {
                 Get.to(() => Details(
-                      function: () {},
+                      function: () {
+                        Get.to(const Balloon());
+                      },
                       text:
                           "استمرار الإدراك البصري لمتابعة ظهور بلونة صغيرة لونها احمر ثم تبدأ يزيد حجمها بالتدريج ومحاولة تفجيرها لمدة30 ثانية. ",
                       assets: "assets/level4/13.png",
+                      title: "المستوى الرابع",
                     ));
               },
               assets: "assets/level4/13.png",
@@ -133,9 +148,12 @@ class _LevelsState extends State<Levels> {
           Level(
               function: () {
                 Get.to(() => Details(
-                      function: () {},
+                      function: () {
+                        Get.to(const Circle());
+                      },
                       text: "مطابقة دائرة ملونة لأخرى بنفس اللون",
                       assets: "assets/level5/16.png",
+                      title: "المستوى الخامس",
                     ));
               },
               assets: "assets/level5/16.png",
@@ -147,9 +165,12 @@ class _LevelsState extends State<Levels> {
           Level(
               function: () {
                 Get.to(() => Details(
-                      function: () {},
+                      function: () {
+                        Get.to(const Change());
+                      },
                       text: "استخراج ( 3) اختلافات",
                       assets: "assets/level6/1.png",
+                      title: "المستوى السادس",
                     ));
               },
               assets: "assets/level6/1.png",
@@ -168,6 +189,7 @@ class _LevelsState extends State<Levels> {
                       text:
                           // "إكمال الشكل بوضع الدائرة الملونة مع الكوب الملون بنفس اللون "
                           "إكمال الجزء الثانى من الولد",
+                      title: "المستوى السابع",
                     ));
               },
               assets: "assets/level7/00.jpg",
@@ -179,12 +201,16 @@ class _LevelsState extends State<Levels> {
           Level(
               function: () {
                 Get.to(() => Details(
-                      function: () {},
+                      function: () {
+                        Get.to(() => const Shape());
+                      },
                       text: "تذكر الناقص من الصورة",
-                      assets: "assets/level8/1.png",
+                      assets: "assets/level8/123.jpg",
+                      imageHeight: MediaQuery.of(context).size.width / 1,
+                      title: "المستوى الثامن",
                     ));
               },
-              assets: "assets/level8/1.png",
+              assets: "assets/level8/123.jpg",
               text1: 'المستوى الثامن',
               text2: 'الذاكرة البصرية'),
           //#################################################################################
@@ -193,19 +219,32 @@ class _LevelsState extends State<Levels> {
           Level(
               function: () {
                 Get.to(() => Details(
-                      function: () {},
+                      function: () {
+                        Get.to(() => const Apple());
+                      },
                       text: "اضغط على اكبر تفاحة و اضغط على اصغر تفاحة",
-                      assets: "assets/level9/1.png",
+                      assets: "assets/level9/222.png",
+                      title: "المستوى التاسع",
                     ));
               },
-              assets: "assets/level9/1.png",
+              assets: "assets/level9/222.png",
               text1: 'المستوى التاسع',
               text2: 'مرونة الانتقال البصري الحركي'),
           //#################################################################################
 
           // level 10
           Level(
-              function: () {},
+              function: () {
+                Get.to(() => Details(
+                  function: () {
+                    Get.to(() => const Move());
+                  },
+                  text: "اوصل السيارة الي المستطيل الابيض",
+                  assets: "assets/level10/park.png",
+                  title: "المستوى العاشر",
+                ));
+              },
+              assets: "assets/level10/park.png",
               text1: 'المستوى العاشر',
               text2: 'مرونة التآزر البصري الحركي'),
           //#################################################################################

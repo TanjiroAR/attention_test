@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:attention_test/levels/level_2.dart';
 import 'package:attention_test/levels/widget/custom_button.dart';
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -59,6 +60,7 @@ class _LightState extends State<Light> {
                         text:
                         "الانتباه البصري الأول لنجم مضئ متحرك يظهر ثم تختفى فى اماكن مختلفة من الشاشة على خلفية مظلمة لمدة 30 ثانية ( ثلاث مرات فى كل مرة 10 ثوانى ) ",
                         assets: "assets/level2/18.png",
+                        title: "المستوى الثاني",
                       ));
                     },
                     buttonText: "المستوى التالي",
@@ -69,6 +71,31 @@ class _LightState extends State<Light> {
           );
         });
   }
+  stop() {
+    _timer.cancel();
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Center(
+              child: Text("😥لقد فشلت"),
+            ),
+            actions: [
+              CustomButton(
+                function: () {
+                  error = 0;
+                  sec = 30;
+                  timer();
+                  Get.back();
+                },
+                buttonText: "حاول مجددا",
+                width: double.infinity,
+              )
+            ],
+          );
+        });
+  }
+
   updateData(int tofa, int toca, int time, int nerrors, String answer , String note) async{
     await sqlDb.updateData("UPDATE 'data' SET tofa = $tofa,toca = $toca,time = $time, nerrors = $nerrors, answer = '$answer', note = '$note'  WHERE level = 1");
 
@@ -80,6 +107,9 @@ class _LightState extends State<Light> {
           sec--;
         } else {
           _timer.cancel();
+          stop();
+          final player = AudioPlayer();
+          player.play(AssetSource('11.wav'));
         }
       });
     });
@@ -97,6 +127,8 @@ class _LightState extends State<Light> {
               Text(sec.toString(), style: TextStyle(fontSize: fontSize,color: Colors.white)),
               TextButton(
                 onPressed: () {
+                  final player = AudioPlayer();
+                  player.play(AssetSource('13.wav'));
                   _timer.cancel();
                   cans = 30 - sec;
                   ans = 30 - sec;

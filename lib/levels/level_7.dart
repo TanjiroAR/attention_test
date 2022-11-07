@@ -5,6 +5,9 @@ import 'package:attention_test/levels/widget/custom_button.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'level_8.dart';
+import 'widget/level_details.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 class Level7 extends StatefulWidget {
   const Level7({Key? key}) : super(key: key);
@@ -39,8 +42,12 @@ class _Level7State extends State<Level7> {
   void initState() {
     // TODO: implement initState
     super.initState();
-
     timer();
+    setState(() {
+      if(sec == 0){
+        stop();
+      }
+    });
   }
 
   timer() {
@@ -50,14 +57,17 @@ class _Level7State extends State<Level7> {
           sec--;
         } else {
           _timer.cancel();
+          stop();
+          final player = AudioPlayer();
+          player.play(AssetSource('11.wav'));
         }
       });
     });
   }
 
+
   stop() {
     _timer.cancel();
-
     showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -69,12 +79,13 @@ class _Level7State extends State<Level7> {
               CustomButton(
                 function: () {
                   error = 0;
-                  Get.back();
                   sec = 30;
                   firstAns = true;
                   timer();
+                  Get.back();
                 },
                 buttonText: "حاول مجددا",
+                width: double.infinity,
               )
             ],
           );
@@ -138,9 +149,14 @@ class _Level7State extends State<Level7> {
                   ),
                   CustomButton(
                     function: ()  {
-                      Get.offAll(() => const Levels());
-                      readData();
-                      cans = 30 - sec;
+                      Get.to(() => Details(
+                        function: () {
+                          Get.to(() => const Shape());
+                        },
+                        text: "تذكر الناقص من الصورة",
+                        assets: "assets/level8/123.jpg",
+                        title: "المستوى الثامن",
+                      ));
                     },
                     buttonText: "المستوى التالي",
                   ),
@@ -173,13 +189,14 @@ class _Level7State extends State<Level7> {
                 onTap: () {
                   error++;
                   if (error == 5) {
+                    final player = AudioPlayer();
+                    player.play(AssetSource('11.wav'));
                     stop();
                   } else {
+                    final player = AudioPlayer();
+                    player.play(AssetSource('14.wav'));
                     incorrect();
                   }
-                  // if (kDebugMode) {
-                  //   print("$ans===================");
-                  // }
                 },
                 child: Ink.image(
                   image: const AssetImage("assets/level7/22.jpg"),
@@ -193,13 +210,14 @@ class _Level7State extends State<Level7> {
                 onTap: () {
                   error++;
                   if (error == 5) {
+                    final player = AudioPlayer();
+                    player.play(AssetSource('11.wav'));
                     stop();
                   } else {
+                    final player = AudioPlayer();
+                    player.play(AssetSource('14.wav'));
                     incorrect();
                   }
-                  // if (kDebugMode) {
-                  //   print("$ans===================");
-                  // }
                 },
                 child: Ink.image(
                   image: const AssetImage("assets/level7/33.jpg"),
@@ -211,16 +229,13 @@ class _Level7State extends State<Level7> {
               InkWell(
                 splashColor: Colors.black26,
                 onTap: () {
+                  final player = AudioPlayer();
+                  player.play(AssetSource('13.wav'));
                   cans = 30 - sec;
+                  correct();
                   int time = cans - ans;
-
                   updateData(ans, cans, time, error, "نعم", "");
 
-                  correct();
-
-                  // if (kDebugMode) {
-                  //   print("$ans===================");
-                  // }
                 },
                 child: Ink.image(
                   image: const AssetImage("assets/level7/3.jpg"),

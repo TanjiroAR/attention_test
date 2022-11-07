@@ -1,37 +1,51 @@
 import 'dart:async';
-
-import 'package:attention_test/levels/level_3.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
-
 import '../data/levels_data.dart';
+import 'level_4.dart';
 import 'levels_list.dart';
 import 'widget/custom_button.dart';
 import 'widget/level_details.dart';
 
-class Star extends StatefulWidget {
-  const Star({Key? key}) : super(key: key);
+class Car extends StatefulWidget {
+  const Car({Key? key}) : super(key: key);
 
   @override
-  State<Star> createState() => _StarState();
+  State<Car> createState() => _CarState();
 }
 
-class _StarState extends State<Star> {
+class _CarState extends State<Car> {
   late Timer _timer;
   late int sec = 30;
   late double fontSize = 50;
   bool a = false;
-  late String text1="ابدء";
+  late String text1 = "ابدء";
   late int cans = 0;
   late int ans = 0;
-  late int time=0;
+  late int time = 0;
   late int error = 0;
   SqlDb sqlDb = SqlDb();
-  updateData(int tofa, int toca, int time, int nerrors, String answer , String note) async{
-    await sqlDb.updateData("UPDATE 'data' SET tofa = $tofa,toca = $toca,time = $time, nerrors = $nerrors, answer = '$answer', note = '$note'  WHERE level = 2");
+  updateData(int tofa, int toca, int time, int nerrors, String answer,
+      String note) async {
+    await sqlDb.updateData(
+        "UPDATE 'data' SET tofa = $tofa,toca = $toca,time = $time, nerrors = $nerrors, answer = '$answer', note = '$note'  WHERE level = 3");
+  }
 
+  timer() {
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      setState(() {
+        if (sec > 0) {
+          sec--;
+        } else {
+          _timer.cancel();
+          stop();
+          final player = AudioPlayer();
+          player.play(AssetSource('11.wav'));
+        }
+      });
+    });
   }
   stop() {
     _timer.cancel();
@@ -58,20 +72,7 @@ class _StarState extends State<Star> {
         });
   }
 
-  timer() {
-    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
-      setState(() {
-        if (sec > 0) {
-          sec--;
-        } else {
-          _timer.cancel();
-          stop();
-          final player = AudioPlayer();
-          player.play(AssetSource('11.wav'));
-        }
-      });
-    });
-  }
+
   correct() {
     _timer.cancel();
     showDialog(
@@ -86,22 +87,21 @@ class _StarState extends State<Star> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   CustomButton(
-                    function: ()  {
+                    function: () {
                       Get.offAll(() => const Levels());
                     },
                     buttonText: "القائمة",
-
                   ),
                   CustomButton(
-                    function: ()  {
-                      Get.offAll(() => Details(
+                    function: () {
+                      Get.to(() => Details(
                         function: () {
-                          Get.to(const Car());
+                          Get.to(const Balloon());
                         },
                         text:
-                        "استمرار الانتباه البصري لسيارة تسير بسرعة ثم تتوقف فجأة و تتكرر(6) مرات متتالية .",
-                        assets: "assets/level3/15.png",
-                        title: "المستوى الثالث",
+                        "استمرار الإدراك البصري لمتابعة ظهور بلونة صغيرة لونها احمر ثم تبدأ يزيد حجمها بالتدريج ومحاولة تفجيرها لمدة30 ثانية. ",
+                        assets: "assets/level4/13.png",
+                        title: "المستوى الرابع",
                       ));
                     },
                     buttonText: "المستوى التالي",
@@ -116,47 +116,18 @@ class _StarState extends State<Star> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
-      body: SafeArea(child: Center(
+      body: SafeArea(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
               sec.toString(),
-              style: TextStyle(color: Colors.white, fontSize: fontSize),
+              style: TextStyle(fontSize: fontSize),
             ),
-            Container(
-              height: 400,
-              color: Colors.black,
-              child: TextButton(
-                onPressed: () {
-                  final player = AudioPlayer();
-                  player.play(AssetSource('13.wav'));
-                  setState(() {
-                    a = false;
-                  });
-                  _timer.cancel();
-                  cans = 30 - sec;
-                  ans = 30 - sec;
-                  int time = cans - ans;
-                  updateData(ans, cans, time, error, "نعم", "");
-                  correct();
-                },
-                child: Lottie.asset(
-                  "assets/level2/star.json",
-                  animate: a,
-                ),
-              ),
-            ),
-            CustomButton(function: (){
-              if(a == false){
-                timer();
-                setState(() {
-                  a = true;
-                  text1 = "توقف";
-                });
-
-              }else{
+            TextButton(
+              onPressed: () {
+                final player = AudioPlayer();
+                player.play(AssetSource('13.wav'));
                 setState(() {
                   a = false;
                 });
@@ -166,11 +137,38 @@ class _StarState extends State<Star> {
                 int time = cans - ans;
                 updateData(ans, cans, time, error, "نعم", "");
                 correct();
-              }
-            },buttonText: text1,width: double.infinity,),
+              },
+              child: Lottie.asset(
+                "assets/level3/car1.json",
+                animate: a,
+              ),
+            ),
+            CustomButton(
+              function: () {
+                if (a == false) {
+                  timer();
+                  setState(() {
+                    a = true;
+                    text1 = "توقف";
+                  });
+                } else {
+                  setState(() {
+                    a = false;
+                  });
+                  _timer.cancel();
+                  cans = 30 - sec;
+                  ans = 30 - sec;
+                  int time = cans - ans;
+                  updateData(ans, cans, time, error, "نعم", "");
+                  correct();
+                }
+              },
+              buttonText: text1,
+              width: double.infinity,
+            ),
           ],
         ),
-      )),
+      ),
     );
   }
 }

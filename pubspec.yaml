@@ -29,6 +29,9 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  intl: ^0.17.0
+  printing:
+  audioplayers: ^1.1.1
   lottie:
   path_provider:
   sqflite:
@@ -73,8 +76,16 @@ flutter:
     - assets/level7/
     - assets/level8/
     - assets/level9/
+    - assets/level10/
     - assets/12.png
     - assets/000.png
+    - assets/77.png
+    - assets/78.png
+    - assets/11.wav
+    - assets/12.wav
+    - assets/13.wav
+    - assets/14.wav
+    - assets/arabic.ttf
 
   # To add assets to your application, add an assets section, like this:
   # assets:

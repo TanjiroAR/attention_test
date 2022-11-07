@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 import '../levels_list.dart';
 
 class Details extends StatelessWidget {
-  final String assets, text, buttonText;
+  final String assets, text, buttonText,title;
   final Function function;
   final double width,
       height,
@@ -19,6 +19,7 @@ class Details extends StatelessWidget {
   final Color colorText, colorButton;
   const Details({
     super.key,
+    this.title = "المستوى",
     this.imageHeight = 200,
     this.imageWidth = 300,
     this.width = double.infinity,
@@ -41,6 +42,7 @@ class Details extends StatelessWidget {
       appBar: AppBar(
         automaticallyImplyLeading: true,
         leading: IconButton(onPressed: (){Get.offAll( const Levels());}, icon:  const Icon(Icons.arrow_back)),
+        title: Center(child: Text(title)),
       ),
       body: Center(
         child: Column(
@@ -51,8 +53,8 @@ class Details extends StatelessWidget {
                 child: Ink.image(
                   image: AssetImage(assets),
                   height: imageHeight,
-                  width: imageWidth,
-                  fit: BoxFit.cover,
+                  width: MediaQuery.of(context).size.width,
+                  fit: BoxFit.fill,
                 )),
             CustomText(
               text: text,

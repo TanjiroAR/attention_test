@@ -1,5 +1,7 @@
 import 'package:attention_test/levels/widget/custom_button.dart';
+import 'package:attention_test/print.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import '../data/levels_data.dart';
 
 class Data extends StatefulWidget {
@@ -200,20 +202,26 @@ class _DataState extends State<Data> {
               return const Center(child: CircularProgressIndicator(),);
             },),
           ),
-          CustomButton(function: (){
-            setState(() {
-              updateData(1);
-              updateData(2);
-              updateData(3);
-              updateData(4);
-              updateData(5);
-              updateData(6);
-              updateData(7);
-              updateData(8);
-              updateData(9);
-              updateData(10);
-            });
-          },buttonText: "مسح جميع البيانات",)
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              CustomButton(function: (){Get.to(const Print());},buttonText: "طباعة"),
+              CustomButton(function: (){
+                setState(() {
+                  updateData(1);
+                  updateData(2);
+                  updateData(3);
+                  updateData(4);
+                  updateData(5);
+                  updateData(6);
+                  updateData(7);
+                  updateData(8);
+                  updateData(9);
+                  updateData(10);
+                });
+              },buttonText: "مسح جميع البيانات",)
+            ],
+          )
         ],
       ),
 

@@ -40,9 +40,9 @@ class Level extends StatelessWidget {
                 children: [
                   Ink.image(
                     image: AssetImage(assets),
-                    height: height,
+                    height: MediaQuery.of(context).size.width / 2,
                     width: double.infinity,
-                    fit: BoxFit.cover,
+                    fit: BoxFit.fill,
                   ),
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
