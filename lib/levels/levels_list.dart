@@ -98,7 +98,7 @@ class _LevelsState extends State<Levels> {
                         Get.to(const Star());
                       },
                       text:
-                          "الانتباه البصري الأول لنجم مضئ متحرك يظهر ثم تختفى فى اماكن مختلفة من الشاشة على خلفية مظلمة لمدة 30 ثانية ( ثلاث مرات فى كل مرة 10 ثوانى ) ",
+                          "الانتباه البصري الأول لنجم مضئ متحرك يظهر ثم تختفى فى اماكن مختلفة من الشاشة على خلفية مظلمة لمدة 30 ثانية",
                       assets: "assets/level2/18.png",
                       title: "المستوى الثاني",
                     ));
@@ -116,12 +116,12 @@ class _LevelsState extends State<Levels> {
                         Get.to(const Car());
                       },
                       text:
-                          "استمرار الانتباه البصري لسيارة تسير بسرعة ثم تتوقف فجأة و تتكرر(6) مرات متتالية .",
-                      assets: "assets/level3/15.png",
+                          "استمرار الانتباه البصري لسيارة تسير بسرعة و محاولة اقافها لمدة 30 ثانية .",
+                      assets: "assets/level3/xaa.jpg",
                       title: "المستوى الثالث",
                     ));
               },
-              assets: "assets/level3/15.png",
+              assets: "assets/level3/xaa.jpg",
               text1: 'المستوى الثالث',
               text2: 'طول مدة استمرار الانتباه البصري للعلاقات المكانية'),
           //#################################################################################
@@ -134,7 +134,7 @@ class _LevelsState extends State<Levels> {
                         Get.to(const Balloon());
                       },
                       text:
-                          "استمرار الإدراك البصري لمتابعة ظهور بلونة صغيرة لونها احمر ثم تبدأ يزيد حجمها بالتدريج ومحاولة تفجيرها لمدة30 ثانية. ",
+                          "استمرار الإدراك البصري لمتابعة ظهور بلونة صغيرة لونها احمر ثم تبدأ ترتفع بالتدريج ومحاولة تفجيرها لمدة30 ثانية. ",
                       assets: "assets/level4/13.png",
                       title: "المستوى الرابع",
                     ));
@@ -152,11 +152,11 @@ class _LevelsState extends State<Levels> {
                         Get.to(const Circle());
                       },
                       text: "مطابقة دائرة ملونة لأخرى بنفس اللون",
-                      assets: "assets/level5/16.png",
+                      assets: "assets/level5/xa.jpg",
                       title: "المستوى الخامس",
                     ));
               },
-              assets: "assets/level5/16.png",
+              assets: "assets/level5/xa.jpg",
               text1: 'المستوى الخامس',
               text2: 'مضاهاة الأشكال'),
           //#################################################################################
@@ -169,11 +169,11 @@ class _LevelsState extends State<Levels> {
                         Get.to(const Change());
                       },
                       text: "استخراج ( 3) اختلافات",
-                      assets: "assets/level6/1.png",
+                      assets: "assets/level6/66.png",
                       title: "المستوى السادس",
                     ));
               },
-              assets: "assets/level6/1.png",
+              assets: "assets/level6/66.png",
               text1: 'المستوى السادس',
               text2: 'التمييز البصري'),
           //#################################################################################
@@ -240,11 +240,11 @@ class _LevelsState extends State<Levels> {
                     Get.to(() => const Move());
                   },
                   text: "اوصل السيارة الي المستطيل الابيض",
-                  assets: "assets/level10/park.png",
+                  assets: "assets/level10/p.jpg",
                   title: "المستوى العاشر",
                 ));
               },
-              assets: "assets/level10/park.png",
+              assets: "assets/level10/p.jpg",
               text1: 'المستوى العاشر',
               text2: 'مرونة التآزر البصري الحركي'),
           //#################################################################################

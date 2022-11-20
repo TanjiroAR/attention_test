@@ -29,11 +29,12 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
-  intl: ^0.17.0
+  pdf:
+  path_provider:
   printing:
+  intl: ^0.17.0
   audioplayers: ^1.1.1
   lottie:
-  path_provider:
   sqflite:
   path:
   get:
@@ -44,6 +45,7 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
+  flutter_native_splash: ^2.2.14
 
 dev_dependencies:
   flutter_test:
@@ -77,10 +79,10 @@ flutter:
     - assets/level8/
     - assets/level9/
     - assets/level10/
-    - assets/12.png
     - assets/000.png
     - assets/77.png
     - assets/78.png
+    - assets/x.png
     - assets/11.wav
     - assets/12.wav
     - assets/13.wav

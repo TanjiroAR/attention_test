@@ -46,29 +46,13 @@ class _CircleState extends State<Circle> {
               child: Text("😥لقد فشلت"),
             ),
             actions: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  CustomButton(
-                    function: () {
-                      errors = 0;
-                      Get.back();
-                      // timer();
-                      setState(() {
-                        sec = 30;
-                        initGame();
-                        timer();
-                      });
-                    },
-                    buttonText: "حاول مجددا",
-                  ),
-                  CustomButton(
-                    function: () {
-                      Get.offAll(() => const Levels());
-                    },
-                    buttonText: "القائمة",
-                  ),
-                ],
+              CustomButton(
+                function: () {
+                  Get.back();
+                  Get.back();
+                },
+                buttonText: "حاول مجددا",
+                width: double.infinity,
               )
             ],
           );
@@ -239,7 +223,7 @@ class _CircleState extends State<Circle> {
                           Get.to(const Change());
                         },
                         text: "استخراج ( 3) اختلافات",
-                        assets: "assets/level6/1.png",
+                        assets: "assets/level6/66.png",
                         title: "المستوى السادس",
                       ));
                     },

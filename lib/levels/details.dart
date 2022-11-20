@@ -1,5 +1,5 @@
 import 'package:attention_test/levels/widget/custom_button.dart';
-import 'package:attention_test/print.dart';
+import 'package:attention_test/print/print.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../data/levels_data.dart';

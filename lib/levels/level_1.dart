@@ -21,14 +21,14 @@ class _LightState extends State<Light> {
   late Timer _timer;
   late int sec = 30;
   late double fontSize = 50;
-  late bool mm = false;
-  late String text1="ابدء";
+  // late bool mm = false;
+  late String text1 = "ابدء";
   double op = 1;
   double he = 100;
   double wi = 100;
   late int cans = 0;
   late int ans = 0;
-  late int time=0;
+  late int time = 0;
   late int error = 0;
   SqlDb sqlDb = SqlDb();
   correct() {
@@ -45,23 +45,22 @@ class _LightState extends State<Light> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   CustomButton(
-                    function: ()  {
+                    function: () {
                       Get.offAll(() => const Levels());
                     },
                     buttonText: "القائمة",
-
                   ),
                   CustomButton(
-                    function: ()  {
+                    function: () {
                       Get.offAll(() => Details(
-                        function: () {
-                          Get.to(const Star());
-                        },
-                        text:
-                        "الانتباه البصري الأول لنجم مضئ متحرك يظهر ثم تختفى فى اماكن مختلفة من الشاشة على خلفية مظلمة لمدة 30 ثانية ( ثلاث مرات فى كل مرة 10 ثوانى ) ",
-                        assets: "assets/level2/18.png",
-                        title: "المستوى الثاني",
-                      ));
+                            function: () {
+                              Get.to(const Star());
+                            },
+                            text:
+                                "الانتباه البصري الأول لنجم مضئ متحرك يظهر ثم تختفى فى اماكن مختلفة من الشاشة على خلفية مظلمة لمدة 30 ثانية",
+                            assets: "assets/level2/18.png",
+                            title: "المستوى الثاني",
+                          ));
                     },
                     buttonText: "المستوى التالي",
                   ),
@@ -71,6 +70,7 @@ class _LightState extends State<Light> {
           );
         });
   }
+
   stop() {
     _timer.cancel();
     showDialog(
@@ -83,9 +83,8 @@ class _LightState extends State<Light> {
             actions: [
               CustomButton(
                 function: () {
-                  error = 0;
-                  sec = 30;
-                  timer();
+
+                  Get.back();
                   Get.back();
                 },
                 buttonText: "حاول مجددا",
@@ -96,13 +95,20 @@ class _LightState extends State<Light> {
         });
   }
 
-  updateData(int tofa, int toca, int time, int nerrors, String answer , String note) async{
-    await sqlDb.updateData("UPDATE 'data' SET tofa = $tofa,toca = $toca,time = $time, nerrors = $nerrors, answer = '$answer', note = '$note'  WHERE level = 1");
-
+  updateData(int tofa, int toca, int time, int nerrors, String answer,
+      String note) async {
+    await sqlDb.updateData(
+        "UPDATE 'data' SET tofa = $tofa,toca = $toca,time = $time, nerrors = $nerrors, answer = '$answer', note = '$note'  WHERE level = 1");
   }
+
   timer() {
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       setState(() {
+        if (sec == 30) {
+          op = 1;
+          he = MediaQuery.of(context).size.width * 1.5;
+          wi = MediaQuery.of(context).size.width;
+        }
         if (sec > 0) {
           sec--;
         } else {
@@ -114,6 +120,14 @@ class _LightState extends State<Light> {
       });
     });
   }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    timer();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -124,7 +138,8 @@ class _LightState extends State<Light> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Text(sec.toString(), style: TextStyle(fontSize: fontSize,color: Colors.white)),
+              Text(sec.toString(),
+                  style: TextStyle(fontSize: fontSize, color: Colors.white)),
               TextButton(
                 onPressed: () {
                   final player = AudioPlayer();
@@ -146,29 +161,30 @@ class _LightState extends State<Light> {
                       padding: const EdgeInsets.all(10),
                       child: Image.asset(
                         "assets/level1/22b.png",
+                        fit: BoxFit.fill,
                       ),
                     )),
               ),
-              CustomButton(function: (){
-                if(mm == false){
-                  timer();
-                  setState(() {
-                    op = 1;
-                    he = 400;
-                    wi = 300;
-                    mm = true;
-                    text1 = "توقف";
-                  });
-
-                }else{
-                  _timer.cancel();
-                  cans = 30 - sec;
-                  ans = 30 - sec;
-                  int time = cans - ans;
-                  updateData(ans, cans, time, error, "نعم", "");
-                  correct();
-                }
-              },buttonText: text1,width: double.infinity,),
+              // CustomButton(function: (){
+              //   if(mm == false){
+              //     timer();
+              //     setState(() {
+              //       op = 1;
+              //       he = 400;
+              //       wi = 300;
+              //       mm = true;
+              //       text1 = "توقف";
+              //     });
+              //
+              //   }else{
+              //     _timer.cancel();
+              //     cans = 30 - sec;
+              //     ans = 30 - sec;
+              //     int time = cans - ans;
+              //     updateData(ans, cans, time, error, "نعم", "");
+              //     correct();
+              //   }
+              // },buttonText: text1,width: double.infinity,),
             ],
           ),
         ),

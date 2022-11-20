@@ -20,8 +20,8 @@ class _BalloonState extends State<Balloon> {
   late int sec = 30;
   late double fontSize = 50;
   bool a = false;
-  double top = 320;
-  double r = 240;
+  late double top;
+  late double r;
   bool isVisible = false;
   late String text1 = "ابدء";
   late int cans = 0;
@@ -38,6 +38,25 @@ class _BalloonState extends State<Balloon> {
   timer() {
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       setState(() {
+        if(sec == 30 && isVisible == false){
+          top = 0;
+          r = 0;
+        }else if(sec == 25 && isVisible == false){
+          top = MediaQuery.of(context).size.height * (4/7);
+          r = 0;
+        }else if(sec == 20 && isVisible == false){
+          top = 0;
+          r = MediaQuery.of(context).size.width* (3/4);
+        }else if(sec == 15 && isVisible == false){
+          top = MediaQuery.of(context).size.height * (4/7);
+          r = MediaQuery.of(context).size.width* (3/4);
+        }else if(sec == 10 && isVisible == false){
+          top = 0;
+          r = 0;
+        }else if(sec == 5 && isVisible == false){
+          top = MediaQuery.of(context).size.height * (4/7);
+          r = 0;
+        }
         if (sec > 0) {
           sec--;
         } else {
@@ -61,9 +80,7 @@ class _BalloonState extends State<Balloon> {
             actions: [
               CustomButton(
                 function: () {
-                  error = 0;
-                  sec = 30;
-                  timer();
+                  Get.back();
                   Get.back();
                 },
                 buttonText: "حاول مجددا",
@@ -100,7 +117,7 @@ class _BalloonState extends State<Balloon> {
                               Get.to(const Circle());
                             },
                             text: "مطابقة دائرة ملونة لأخرى بنفس اللون",
-                            assets: "assets/level5/16.png",
+                            assets: "assets/level5/xa.jpg",
                             title: "المستوى الخامس",
                           ));
                     },
@@ -112,9 +129,19 @@ class _BalloonState extends State<Balloon> {
           );
         });
   }
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    timer();
+  }
 
   @override
   Widget build(BuildContext context) {
+    if(sec == 30){
+      top = MediaQuery.of(context).size.height * (4/7);
+      r = MediaQuery.of(context).size.width* (3/4);
+    }
     return Scaffold(
       body: SafeArea(
           child: Column(
@@ -125,8 +152,8 @@ class _BalloonState extends State<Balloon> {
             style: TextStyle(fontSize: fontSize),
           ),
           SizedBox(
-            height: 430,
-            width: 360,
+            height: MediaQuery.of(context).size.height * (3/4),
+            width: MediaQuery.of(context).size.width,
             child: Stack(
               children: <Widget>[
                 AnimatedPositioned(
@@ -166,21 +193,21 @@ class _BalloonState extends State<Balloon> {
               ],
             ),
           ),
-          CustomButton(
-            function: () {
-              if (a == false) {
-                a = true;
-                timer();
-                setState(() {
-                  top = 0;
-                  r = 0;
-                  text1 = "توقف";
-                });
-              }
-            },
-            buttonText: text1,
-            width: double.infinity,
-          ),
+          // CustomButton(
+          //   function: () {
+          //     if (a == false) {
+          //       a = true;
+          //       timer();
+          //       setState(() {
+          //         top = 0;
+          //         r = 0;
+          //         text1 = "توقف";
+          //       });
+          //     }
+          //   },
+          //   buttonText: text1,
+          //   width: double.infinity,
+          // ),
         ],
       )),
     );

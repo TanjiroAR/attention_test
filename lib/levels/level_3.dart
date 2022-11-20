@@ -36,6 +36,9 @@ class _CarState extends State<Car> {
   timer() {
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       setState(() {
+        if(sec == 30){
+          a = true;
+        }
         if (sec > 0) {
           sec--;
         } else {
@@ -59,9 +62,7 @@ class _CarState extends State<Car> {
             actions: [
               CustomButton(
                 function: () {
-                  error = 0;
-                  sec = 30;
-                  timer();
+                  Get.back();
                   Get.back();
                 },
                 buttonText: "حاول مجددا",
@@ -99,7 +100,7 @@ class _CarState extends State<Car> {
                           Get.to(const Balloon());
                         },
                         text:
-                        "استمرار الإدراك البصري لمتابعة ظهور بلونة صغيرة لونها احمر ثم تبدأ يزيد حجمها بالتدريج ومحاولة تفجيرها لمدة30 ثانية. ",
+                        "استمرار الإدراك البصري لمتابعة ظهور بلونة صغيرة لونها احمر ثم تبدأ ترتفع بالتدريج ومحاولة تفجيرها لمدة30 ثانية. ",
                         assets: "assets/level4/13.png",
                         title: "المستوى الرابع",
                       ));
@@ -111,6 +112,12 @@ class _CarState extends State<Car> {
             ],
           );
         });
+  }
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    timer();
   }
 
   @override
@@ -126,32 +133,9 @@ class _CarState extends State<Car> {
             ),
             TextButton(
               onPressed: () {
-                final player = AudioPlayer();
-                player.play(AssetSource('13.wav'));
-                setState(() {
-                  a = false;
-                });
-                _timer.cancel();
-                cans = 30 - sec;
-                ans = 30 - sec;
-                int time = cans - ans;
-                updateData(ans, cans, time, error, "نعم", "");
-                correct();
-              },
-              child: Lottie.asset(
-                "assets/level3/car1.json",
-                animate: a,
-              ),
-            ),
-            CustomButton(
-              function: () {
-                if (a == false) {
-                  timer();
-                  setState(() {
-                    a = true;
-                    text1 = "توقف";
-                  });
-                } else {
+                if(a == true){
+                  final player = AudioPlayer();
+                  player.play(AssetSource('13.wav'));
                   setState(() {
                     a = false;
                   });
@@ -163,9 +147,34 @@ class _CarState extends State<Car> {
                   correct();
                 }
               },
-              buttonText: text1,
-              width: double.infinity,
+              child: Lottie.asset(
+                "assets/level3/car1.json",
+                animate: a,
+              ),
             ),
+            // CustomButton(
+            //   function: () {
+            //     if (a == false) {
+            //       timer();
+            //       setState(() {
+            //         a = true;
+            //         text1 = "توقف";
+            //       });
+            //     } else {
+            //       setState(() {
+            //         a = false;
+            //       });
+            //       _timer.cancel();
+            //       cans = 30 - sec;
+            //       ans = 30 - sec;
+            //       int time = cans - ans;
+            //       updateData(ans, cans, time, error, "نعم", "");
+            //       correct();
+            //     }
+            //   },
+            //   buttonText: text1,
+            //   width: double.infinity,
+            // ),
           ],
         ),
       ),

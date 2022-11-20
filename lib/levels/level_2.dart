@@ -22,7 +22,7 @@ class _StarState extends State<Star> {
   late Timer _timer;
   late int sec = 30;
   late double fontSize = 50;
-  bool a = false;
+  late bool a = false;
   late String text1="ابدء";
   late int cans = 0;
   late int ans = 0;
@@ -45,9 +45,7 @@ class _StarState extends State<Star> {
             actions: [
               CustomButton(
                 function: () {
-                  error = 0;
-                  sec = 30;
-                  timer();
+                  Get.back();
                   Get.back();
                 },
                 buttonText: "حاول مجددا",
@@ -61,9 +59,13 @@ class _StarState extends State<Star> {
   timer() {
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       setState(() {
+        if(sec == 30){
+          a = true;
+        }
         if (sec > 0) {
           sec--;
         } else {
+          a = false;
           _timer.cancel();
           stop();
           final player = AudioPlayer();
@@ -99,8 +101,8 @@ class _StarState extends State<Star> {
                           Get.to(const Car());
                         },
                         text:
-                        "استمرار الانتباه البصري لسيارة تسير بسرعة ثم تتوقف فجأة و تتكرر(6) مرات متتالية .",
-                        assets: "assets/level3/15.png",
+                        "استمرار الانتباه البصري لسيارة تسير بسرعة و محاولة اقافها لمدة 30 ثانية .",
+                        assets: "assets/level3/xaa.jpg",
                         title: "المستوى الثالث",
                       ));
                     },
@@ -112,7 +114,12 @@ class _StarState extends State<Star> {
           );
         });
   }
-
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    timer();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -130,17 +137,19 @@ class _StarState extends State<Star> {
               color: Colors.black,
               child: TextButton(
                 onPressed: () {
-                  final player = AudioPlayer();
-                  player.play(AssetSource('13.wav'));
-                  setState(() {
-                    a = false;
-                  });
-                  _timer.cancel();
-                  cans = 30 - sec;
-                  ans = 30 - sec;
-                  int time = cans - ans;
-                  updateData(ans, cans, time, error, "نعم", "");
-                  correct();
+                  if(a == true){
+                    final player = AudioPlayer();
+                    player.play(AssetSource('13.wav'));
+                    setState(() {
+                      a = false;
+                    });
+                    _timer.cancel();
+                    cans = 30 - sec;
+                    ans = 30 - sec;
+                    int time = cans - ans;
+                    updateData(ans, cans, time, error, "نعم", "");
+                    correct();
+                  }
                 },
                 child: Lottie.asset(
                   "assets/level2/star.json",
@@ -148,26 +157,26 @@ class _StarState extends State<Star> {
                 ),
               ),
             ),
-            CustomButton(function: (){
-              if(a == false){
-                timer();
-                setState(() {
-                  a = true;
-                  text1 = "توقف";
-                });
-
-              }else{
-                setState(() {
-                  a = false;
-                });
-                _timer.cancel();
-                cans = 30 - sec;
-                ans = 30 - sec;
-                int time = cans - ans;
-                updateData(ans, cans, time, error, "نعم", "");
-                correct();
-              }
-            },buttonText: text1,width: double.infinity,),
+            // CustomButton(function: (){
+            //   if(a == false){
+            //     timer();
+            //     setState(() {
+            //       a = true;
+            //       text1 = "توقف";
+            //     });
+            //
+            //   }else{
+            //     setState(() {
+            //       a = false;
+            //     });
+            //     _timer.cancel();
+            //     cans = 30 - sec;
+            //     ans = 30 - sec;
+            //     int time = cans - ans;
+            //     updateData(ans, cans, time, error, "نعم", "");
+            //     correct();
+            //   }
+            // },buttonText: text1,width: double.infinity,),
           ],
         ),
       )),

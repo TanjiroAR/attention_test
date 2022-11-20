@@ -138,7 +138,7 @@ class _AppleState extends State<Apple> {
                           Get.to(() => const Move());
                         },
                         text: "اوصل السيارة الي المستطيل الابيض",
-                        assets: "assets/level10/park.png",
+                        assets: "assets/level10/p.jpg",
                         title: "المستوى العاشر",
                       ));
                     },
