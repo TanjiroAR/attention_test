@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.attention_test">
    <application
-        android:label="attention_test"
+        android:label="اختبار الانتباه"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

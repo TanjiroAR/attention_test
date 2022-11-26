@@ -1,6 +1,7 @@
-import 'package:attention_test/levels/levels_list.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import 'login_sign_up/login_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const Levels(),
+      home: const Login(),
     );
   }
 }

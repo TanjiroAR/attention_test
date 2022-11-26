@@ -220,10 +220,10 @@ class _AppleState extends State<Apple> {
                       }
                     },
                     child: Ink.image(
-                      image: const AssetImage("assets/level9/44.png"),
-                      height: MediaQuery.of(context).size.width / 4,
+                      image: const AssetImage("assets/level9/op2.png"),
+                      height: MediaQuery.of(context).size.width / 3.5,
                       width: MediaQuery.of(context).size.width / 3,
-                      fit: BoxFit.cover,
+                      fit: BoxFit.fill,
                     ),
                   ),
                   InkWell(
@@ -236,10 +236,10 @@ class _AppleState extends State<Apple> {
 
                     },
                     child: Ink.image(
-                      image: const AssetImage("assets/level9/45.png"),
+                      image: const AssetImage("assets/level9/op3.png"),
                       height: MediaQuery.of(context).size.width / 3,
                       width: MediaQuery.of(context).size.width / 3,
-                      fit: BoxFit.cover,
+                      fit: BoxFit.fill,
                     ),
                   ),
                   InkWell(
@@ -257,10 +257,10 @@ class _AppleState extends State<Apple> {
                       }
                     },
                     child: Ink.image(
-                      image: const AssetImage("assets/level9/54.png"),
+                      image: const AssetImage("assets/level9/op1.png"),
                       height: MediaQuery.of(context).size.width / 4,
                       width: MediaQuery.of(context).size.width / 3,
-                      fit: BoxFit.cover,
+                      fit: BoxFit.fill,
                     ),
                   ),
                 ],
@@ -284,10 +284,10 @@ class _AppleState extends State<Apple> {
                       }
                     },
                     child: Ink.image(
-                      image: const AssetImage("assets/level9/45.png"),
+                      image: const AssetImage("assets/level9/op3.png"),
                       height: MediaQuery.of(context).size.width / 3,
                       width: MediaQuery.of(context).size.width / 3,
-                      fit: BoxFit.cover,
+                      fit: BoxFit.fill,
                     ),
                   ),
                   InkWell(
@@ -301,10 +301,10 @@ class _AppleState extends State<Apple> {
                       updateData(ans, cans, time, error, "نعم", "");
                     },
                     child: Ink.image(
-                      image: const AssetImage("assets/level9/54.png"),
+                      image: const AssetImage("assets/level9/op1.png"),
                       height: MediaQuery.of(context).size.width / 4,
                       width: MediaQuery.of(context).size.width / 3,
-                      fit: BoxFit.cover,
+                      fit: BoxFit.fill,
                     ),
                   ),
                   InkWell(
@@ -322,10 +322,10 @@ class _AppleState extends State<Apple> {
                       }
                     },
                     child: Ink.image(
-                      image: const AssetImage("assets/level9/44.png"),
-                      height: MediaQuery.of(context).size.width / 4,
+                      image: const AssetImage("assets/level9/op2.png"),
+                      height: MediaQuery.of(context).size.width / 3.5,
                       width: MediaQuery.of(context).size.width / 3,
-                      fit: BoxFit.cover,
+                      fit: BoxFit.fill,
                     ),
                   ),
                 ],
