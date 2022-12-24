@@ -117,11 +117,11 @@ class _LevelsState extends State<Levels> {
                       },
                       text:
                           "استمرار الانتباه البصري لسيارة تسير بسرعة و محاولة اقافها لمدة 30 ثانية .",
-                      assets: "assets/level3/xaa.jpg",
+                      assets: "assets/level3/26.png",
                       title: "المستوى الثالث",
                     ));
               },
-              assets: "assets/level3/xaa.jpg",
+              assets: "assets/level3/26.png",
               text1: 'المستوى الثالث',
               text2: 'طول مدة استمرار الانتباه البصري للعلاقات المكانية'),
           //#################################################################################

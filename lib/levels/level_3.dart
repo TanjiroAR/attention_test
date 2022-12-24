@@ -131,25 +131,31 @@ class _CarState extends State<Car> {
               sec.toString(),
               style: TextStyle(fontSize: fontSize),
             ),
-            TextButton(
-              onPressed: () {
-                if(a == true){
-                  final player = AudioPlayer();
-                  player.play(AssetSource('13.wav'));
-                  setState(() {
-                    a = false;
-                  });
-                  _timer.cancel();
-                  cans = 30 - sec;
-                  ans = 30 - sec;
-                  int time = cans - ans;
-                  updateData(ans, cans, time, error, "نعم", "");
-                  correct();
-                }
-              },
-              child: Lottie.asset(
-                "assets/level3/car1.json",
-                animate: a,
+            SizedBox(
+              height: MediaQuery.of(context).size.width *1.5,
+              width: MediaQuery.of(context).size.width * 4,
+              child: TextButton(
+                onPressed: () {
+                  if(a == true){
+                    final player = AudioPlayer();
+                    player.play(AssetSource('13.wav'));
+                    setState(() {
+                      a = false;
+                    });
+                    _timer.cancel();
+                    cans = 30 - sec;
+                    ans = 30 - sec;
+                    int time = cans - ans;
+                    updateData(ans, cans, time, error, "نعم", "");
+                    correct();
+                  }
+                },
+                child: Lottie.asset(
+                  "assets/level3/26.json",
+                  height: MediaQuery.of(context).size.width * 1.5,
+                  fit: BoxFit.fill,
+                  animate: a,
+                ),
               ),
             ),
             // CustomButton(

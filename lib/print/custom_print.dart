@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart';
 import '../data/levels_data.dart';
+import 'dart:math';
 void generateAndPrintArabicPdf(BuildContext context ,String name,String date,String dateNow,String gen,String classroom,String school,String diagnosis,) async {
   SqlDb sqlDb = SqlDb();
   List<Map> response = await sqlDb.readData("SELECT tofa,nerrors,toca FROM data");
@@ -19,15 +20,16 @@ void generateAndPrintArabicPdf(BuildContext context ,String name,String date,Str
         return Center(
             child:
             Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         Directionality(
                             textDirection: TextDirection.rtl,
                             child: Center(
                                 child: Text(
-                                    name.toString(), style: const TextStyle(
+                                    '''         ${name.toString()}''', style: const TextStyle(
                                   fontSize: 10,
                                 ))
                             )
@@ -38,18 +40,18 @@ void generateAndPrintArabicPdf(BuildContext context ,String name,String date,Str
                                 child: Text('اسم المتدرب : ', style: const TextStyle(
                                   fontSize: 10,
                                 ))
-                            )
+                            ),
                         ),
                       ]
                   ),
                   Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         Directionality(
                             textDirection: TextDirection.rtl,
                             child: Center(
                                 child: Text(
-                                    date.toString(), style: const TextStyle(
+                                    '''${date.toString()}           ''', style: const TextStyle(
                                   fontSize: 10,
                                 ))
                             )
@@ -65,13 +67,13 @@ void generateAndPrintArabicPdf(BuildContext context ,String name,String date,Str
                       ]
                   ),
                   Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         Directionality(
                             textDirection: TextDirection.rtl,
                             child: Center(
                                 child: Text(
-                                    dateNow.toString(), style: const TextStyle(
+                                    '''${dateNow.toString()}           ''', style: const TextStyle(
                                   fontSize: 10,
                                 ))
                             )
@@ -88,13 +90,13 @@ void generateAndPrintArabicPdf(BuildContext context ,String name,String date,Str
                   ),
 
                   Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         Directionality(
                             textDirection: TextDirection.rtl,
                             child: Center(
                                 child: Text(
-                                    gen.toString(), style: const TextStyle(
+                                    '''         ${gen.toString()}''', style: const TextStyle(
                                   fontSize: 10,
                                 ))
                             )
@@ -110,13 +112,13 @@ void generateAndPrintArabicPdf(BuildContext context ,String name,String date,Str
                       ]
                   ),
                   Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         Directionality(
                             textDirection: TextDirection.rtl,
                             child: Center(
                                 child: Text(
-                                    classroom.toString(), style: const TextStyle(
+                                    '''         ${classroom.toString()}''', style: const TextStyle(
                                   fontSize: 10,
                                 ))
                             )
@@ -132,13 +134,13 @@ void generateAndPrintArabicPdf(BuildContext context ,String name,String date,Str
                       ]
                   ),
                   Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         Directionality(
                             textDirection: TextDirection.rtl,
                             child: Center(
                                 child: Text(
-                                    school.toString(), style: const TextStyle(
+                                    '''         ${school.toString()}''', style: const TextStyle(
                                   fontSize: 10,
                                 ))
                             )
@@ -155,13 +157,13 @@ void generateAndPrintArabicPdf(BuildContext context ,String name,String date,Str
                   ),
 
                   Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         Directionality(
                             textDirection: TextDirection.rtl,
                             child: Center(
                                 child: Text(
-                                    diagnosis.toString(), style: const TextStyle(
+                                    '''         ${diagnosis.toString()}''', style: const TextStyle(
                                   fontSize: 10,
                                 ))
                             )
@@ -177,10 +179,33 @@ void generateAndPrintArabicPdf(BuildContext context ,String name,String date,Str
                       ]
                   ),
 
+                  Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Directionality(
+                            textDirection: TextDirection.rtl,
+                            child: Center(
+                                child: Text(
+                                    '''${(Random().nextInt(88888888)+10000000).toString()}           ''', style: const TextStyle(
+                                  fontSize: 10,
+                                ))
+                            )
+                        ),
+                        Directionality(
+                            textDirection: TextDirection.rtl,
+                            child: Center(
+                                child: Text('الرقم التسلسلي : ', style: const TextStyle(
+                                  fontSize: 10,
+                                ))
+                            )
+                        ),
+                      ]
+                  ),
                   Directionality(
                       textDirection: TextDirection.rtl,
                       child: Text('الاحصائيات' , style: const TextStyle(
-                          fontSize: 10
+                          fontSize: 10,
+                        color: PdfColors.red,
                       ))
                   ),
                   Container(

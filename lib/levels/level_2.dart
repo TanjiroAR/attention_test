@@ -102,7 +102,7 @@ class _StarState extends State<Star> {
                         },
                         text:
                         "استمرار الانتباه البصري لسيارة تسير بسرعة و محاولة اقافها لمدة 30 ثانية .",
-                        assets: "assets/level3/xaa.jpg",
+                        assets: "assets/level3/26.png",
                         title: "المستوى الثالث",
                       ));
                     },
