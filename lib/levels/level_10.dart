@@ -1,11 +1,11 @@
 import 'dart:async';
 
+import 'package:attention_test/levels/final.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../data/levels_data.dart';
-import 'levels_list.dart';
 import 'widget/custom_button.dart';
 
 class Move extends StatefulWidget {
@@ -27,6 +27,8 @@ class _MoveState extends State<Move> {
   late int error = 0;
   late bool top = false;
   late bool right = false;
+  late bool x = false;
+  late bool y = false;
   SqlDb sqlDb = SqlDb();
   late double fontSize = 50;
   correct() {
@@ -46,10 +48,10 @@ class _MoveState extends State<Move> {
             actions: [
               CustomButton(
                 function: () {
-                  Get.offAll(() => const Levels());
+                  Get.offAll(() => const FinalScreen());
                   cans = 30 - sec;
                 },
-                buttonText: "القائمة",
+                buttonText: "عرض النتائج",
                 width: double.infinity,
               )
             ],
@@ -60,6 +62,12 @@ class _MoveState extends State<Move> {
   timer() {
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       setState(() {
+        if(x==true && y==true){
+          _timer.cancel();
+          final player = AudioPlayer();
+          player.play(AssetSource('14.wav'));
+          incorrect();
+        }
         if (sec > 0) {
           sec--;
         } else {
@@ -94,6 +102,7 @@ class _MoveState extends State<Move> {
             actions: [
               CustomButton(
                 function: () {
+                  Get.back();
                   Get.back();
                   timer();
                 },
@@ -170,8 +179,27 @@ class _MoveState extends State<Move> {
                   child: Image(
                     image: const AssetImage("assets/level10/car.png"),
                     height: MediaQuery.of(context).size.width / 10,
+                    width: MediaQuery.of(context).size.width / 6,
                   ),
-                )
+                ),
+                Positioned(
+                    top: (MediaQuery.of(context).size.width / 2) -
+                        (MediaQuery.of(context).size.width / 10),
+                    right: (MediaQuery.of(context).size.width / 15),
+                    child: Image(
+                      image: const AssetImage("assets/level10/carwhite.png"),
+                      height: MediaQuery.of(context).size.width / 10,
+                      width: MediaQuery.of(context).size.width / 6,
+                    )),
+                Positioned(
+                    top: (MediaQuery.of(context).size.width / 2) +
+                        (MediaQuery.of(context).size.width / 10),
+                    right: (MediaQuery.of(context).size.width / 15),
+                    child: Image(
+                      image: const AssetImage("assets/level10/carwhite.png"),
+                      height: MediaQuery.of(context).size.width / 10,
+                      width: MediaQuery.of(context).size.width / 6,
+                    )),
               ],
             ),
           ),
@@ -191,6 +219,7 @@ class _MoveState extends State<Move> {
                     setState(() {
                       if (r > 0) {
                         r = r - 10;
+                        right = false;
                       }
                     });
                   },
@@ -223,8 +252,11 @@ class _MoveState extends State<Move> {
                                   t = t + 10;
                                 }
                               });
-                              if(t == 0){
+                              if (t == 0) {
                                 top = true;
+                                y = false;
+                              }else{
+                                y = true;
                               }
                               if (top == true && right == true) {
                                 final player = AudioPlayer();
@@ -257,8 +289,11 @@ class _MoveState extends State<Move> {
                                   t = t - 10;
                                 }
                               });
-                              if(t == 0){
+                              if (t == 0) {
                                 top = true;
+                                y = false;
+                              }else{
+                                y = true;
                               }
                               if (top == true && right == true) {
                                 final player = AudioPlayer();
@@ -286,6 +321,11 @@ class _MoveState extends State<Move> {
                 width: MediaQuery.of(context).size.width / 3,
                 child: IconButton(
                   onPressed: () {
+                    if (r >=
+                        (MediaQuery.of(context).size.width -
+                            (MediaQuery.of(context).size.width / 4.7))-(MediaQuery.of(context).size.width / 4.7)) {
+                      x = true;
+                    }
                     if (firstAns == true) {
                       firstAns = false;
                       ans = 30 - sec;
@@ -297,11 +337,13 @@ class _MoveState extends State<Move> {
                         r = r + 10;
                       }
                     });
-                    if(r >= (MediaQuery.of(context).size.width -
-                        (MediaQuery.of(context).size.width / 4.7))){
+                    if (r >=
+                        (MediaQuery.of(context).size.width -
+                                (MediaQuery.of(context).size.width / 4.7)) -
+                            10) {
                       right = true;
                     }
-                    if (t==0 && right == true) {
+                    if (t == 0 && right == true) {
                       final player = AudioPlayer();
                       player.play(AssetSource('13.wav'));
                       cans = 30 - sec;

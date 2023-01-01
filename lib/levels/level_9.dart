@@ -237,7 +237,7 @@ class _AppleState extends State<Apple> {
                     },
                     child: Ink.image(
                       image: const AssetImage("assets/level9/op3.png"),
-                      height: MediaQuery.of(context).size.width / 3,
+                      height: MediaQuery.of(context).size.width / 2.5,
                       width: MediaQuery.of(context).size.width / 3,
                       fit: BoxFit.fill,
                     ),
@@ -259,7 +259,7 @@ class _AppleState extends State<Apple> {
                     child: Ink.image(
                       image: const AssetImage("assets/level9/op1.png"),
                       height: MediaQuery.of(context).size.width / 4,
-                      width: MediaQuery.of(context).size.width / 3,
+                      width: MediaQuery.of(context).size.width / 4,
                       fit: BoxFit.fill,
                     ),
                   ),
@@ -269,6 +269,23 @@ class _AppleState extends State<Apple> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
+                  InkWell(
+                    splashColor: Colors.black26,
+                    onTap: () {
+                      final player = AudioPlayer();
+                      player.play(AssetSource('13.wav'));
+                      cans = 30 - sec;
+                      correct();
+                      int time = cans - ans;
+                      updateData(ans, cans, time, error, "نعم", "");
+                    },
+                    child: Ink.image(
+                      image: const AssetImage("assets/level9/op1.png"),
+                      height: MediaQuery.of(context).size.width / 4.5,
+                      width: MediaQuery.of(context).size.width / 4,
+                      fit: BoxFit.fill,
+                    ),
+                  ),
                   InkWell(
                     splashColor: Colors.black26,
                     onTap: () {
@@ -285,24 +302,7 @@ class _AppleState extends State<Apple> {
                     },
                     child: Ink.image(
                       image: const AssetImage("assets/level9/op3.png"),
-                      height: MediaQuery.of(context).size.width / 3,
-                      width: MediaQuery.of(context).size.width / 3,
-                      fit: BoxFit.fill,
-                    ),
-                  ),
-                  InkWell(
-                    splashColor: Colors.black26,
-                    onTap: () {
-                      final player = AudioPlayer();
-                      player.play(AssetSource('13.wav'));
-                      cans = 30 - sec;
-                      correct();
-                      int time = cans - ans;
-                      updateData(ans, cans, time, error, "نعم", "");
-                    },
-                    child: Ink.image(
-                      image: const AssetImage("assets/level9/op1.png"),
-                      height: MediaQuery.of(context).size.width / 4,
+                      height: MediaQuery.of(context).size.width / 2.5,
                       width: MediaQuery.of(context).size.width / 3,
                       fit: BoxFit.fill,
                     ),
@@ -323,7 +323,7 @@ class _AppleState extends State<Apple> {
                     },
                     child: Ink.image(
                       image: const AssetImage("assets/level9/op2.png"),
-                      height: MediaQuery.of(context).size.width / 3.5,
+                      height: MediaQuery.of(context).size.width / 3,
                       width: MediaQuery.of(context).size.width / 3,
                       fit: BoxFit.fill,
                     ),

@@ -217,6 +217,11 @@ class _CircleState extends State<Circle> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   CustomButton(
+                      function: () {
+                        Get.offAll(() => const Levels());
+                      },
+                      buttonText: "القائمة"),
+                  CustomButton(
                     function: () {
                       Get.to(() => Details(
                         function: () {
@@ -229,11 +234,7 @@ class _CircleState extends State<Circle> {
                     },
                     buttonText: "المستوى التالي",
                   ),
-                  CustomButton(
-                      function: () {
-                        Get.offAll(() => const Levels());
-                      },
-                      buttonText: "القائمة"),
+
                 ],
               ),
             ),
