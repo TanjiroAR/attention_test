@@ -63,10 +63,15 @@ class _MoveState extends State<Move> {
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       setState(() {
         if(x==true && y==true){
+          firstAns == true;
           _timer.cancel();
           final player = AudioPlayer();
           player.play(AssetSource('14.wav'));
           incorrect();
+        }
+        if(error == 5){
+          _timer.cancel();
+          stop();
         }
         if (sec > 0) {
           sec--;
@@ -87,6 +92,7 @@ class _MoveState extends State<Move> {
   }
 
   incorrect() {
+    error++;
     _timer.cancel();
     if (firstAns == true) {
       firstAns = false;
@@ -102,9 +108,14 @@ class _MoveState extends State<Move> {
             actions: [
               CustomButton(
                 function: () {
-                  Get.back();
-                  Get.back();
                   timer();
+                  Get.back();
+                  x = false;
+                  y = false;
+                  setState(() {
+                    t = 0;
+                    r = 0;
+                  });
                 },
                 buttonText: "حاول مجددا",
                 width: double.infinity,
@@ -212,10 +223,6 @@ class _MoveState extends State<Move> {
                 width: MediaQuery.of(context).size.width / 3,
                 child: IconButton(
                   onPressed: () {
-                    if (firstAns == true) {
-                      firstAns = false;
-                      ans = 30 - sec;
-                    }
                     setState(() {
                       if (r > 0) {
                         r = r - 10;
@@ -242,10 +249,6 @@ class _MoveState extends State<Move> {
                           /// up
                           IconButton(
                             onPressed: () {
-                              if (firstAns == true) {
-                                firstAns = false;
-                                ans = 30 - sec;
-                              }
                               setState(() {
                                 if (t <
                                     (MediaQuery.of(context).size.width / 3.8)) {
@@ -259,12 +262,14 @@ class _MoveState extends State<Move> {
                                 y = true;
                               }
                               if (top == true && right == true) {
+                                firstAns == true;
                                 final player = AudioPlayer();
                                 player.play(AssetSource('13.wav'));
                                 cans = 30 - sec;
-                                time = cans - ans;
-                                updateData(ans, cans, time, 0, "نعم", "");
                                 correct();
+                                time = cans - ans;
+                                updateData(ans, cans, time, error, "نعم", "");
+
                               }
                             },
                             icon: const Icon(
@@ -279,10 +284,6 @@ class _MoveState extends State<Move> {
                           /// down
                           IconButton(
                             onPressed: () {
-                              if (firstAns == true) {
-                                firstAns = false;
-                                ans = 30 - sec;
-                              }
                               setState(() {
                                 if ((-1 * t) <
                                     (MediaQuery.of(context).size.width / 3.8)) {
@@ -296,12 +297,14 @@ class _MoveState extends State<Move> {
                                 y = true;
                               }
                               if (top == true && right == true) {
+                                firstAns == true;
                                 final player = AudioPlayer();
                                 player.play(AssetSource('13.wav'));
                                 cans = 30 - sec;
-                                time = cans - ans;
-                                updateData(ans, cans, time, 0, "نعم", "");
                                 correct();
+                                time = cans - ans;
+                                updateData(ans, cans, time, error, "نعم", "");
+
                               }
                             },
                             icon: const Icon(
@@ -326,10 +329,6 @@ class _MoveState extends State<Move> {
                             (MediaQuery.of(context).size.width / 4.7))-(MediaQuery.of(context).size.width / 4.7)) {
                       x = true;
                     }
-                    if (firstAns == true) {
-                      firstAns = false;
-                      ans = 30 - sec;
-                    }
                     setState(() {
                       if (r <
                           (MediaQuery.of(context).size.width -
@@ -344,12 +343,14 @@ class _MoveState extends State<Move> {
                       right = true;
                     }
                     if (t == 0 && right == true) {
+                      firstAns == true;
                       final player = AudioPlayer();
                       player.play(AssetSource('13.wav'));
                       cans = 30 - sec;
-                      time = cans - ans;
-                      updateData(ans, cans, time, 0, "نعم", "");
                       correct();
+                      time = cans - ans;
+                      updateData(ans, cans, time, error, "نعم", "");
+
                     }
                   },
                   icon: const Icon(

@@ -17,7 +17,7 @@ class CustomButton extends StatelessWidget {
     this.borderRadius = 10,
     this.sizeTextButton = 15,
     this.fontWeight = FontWeight.bold,
-    this.colorButton = Colors.blueAccent,
+    this.colorButton = Colors.purple,
     this.colorTextButton = Colors.white,
   });
 

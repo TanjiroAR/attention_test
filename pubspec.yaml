@@ -37,7 +37,9 @@ dependencies:
   lottie:
   sqflite:
   path:
+  http:
   get:
+  shared_preferences:
   flutter:
     sdk: flutter
 
@@ -89,7 +91,15 @@ flutter:
     - assets/13.wav
     - assets/14.wav
     - assets/arabic.ttf
-
+  fonts:
+    - family: Lato
+      fonts:
+        - asset: assets/fonts/Lato-Regular.ttf
+        - asset: assets/fonts/Lato-Bold.ttf
+          weight: 700
+    - family: Anton
+      fonts:
+        - asset: assets/fonts/Anton-Regular.ttf
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg

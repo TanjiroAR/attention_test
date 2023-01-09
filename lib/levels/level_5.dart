@@ -103,7 +103,7 @@ class _CircleState extends State<Circle> {
       final player = AudioPlayer();
       player.play(AssetSource('13.wav'));
       int toca = 30 - sec;
-      int time = ans - toca;
+      int time = toca - ans;
       updateData(ans, toca, time, errors, "نعم", "");
       _timer.cancel();
       gameOver = true;
